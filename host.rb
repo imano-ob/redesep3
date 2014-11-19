@@ -8,7 +8,7 @@ class Host
   end
 
   def sendToHost(package, hostname)
-    ip = getIpByHostname(hostname)
+    ip = self.getIpByHostname(hostname)
     self.sendToIp(package, ip)
   end
 
