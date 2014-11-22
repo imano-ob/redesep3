@@ -12,9 +12,11 @@ class Router
   end
 
   def getInterface (ip)
-    #TODO: black magic para pegar o i certo
-    i = 0
-    @interfaces[i]
+    @interfaces.each do |interface|
+      if interface.receives(ip)
+        return interface
+      end
+      #TODO: erro
   end
 
 end
