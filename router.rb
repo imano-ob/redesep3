@@ -17,6 +17,11 @@ class Router
         return interface
       end
       #TODO: erro
+    end
+  end
+  
+  def receive(package)
+    self.sendToIp(package, package.getDest)
   end
 
 end

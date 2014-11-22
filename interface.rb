@@ -8,7 +8,7 @@ class Interface
   def sendPackage(package, ip)
     #TODO: limite de banda
     dest = self.getDest(ip)
-    event = Event.new(timeManager.getTime(), package, dest)
+    event = Event.new(eventManager.getTime(), package, dest)
     eventManager.addEvent()
   end
 
@@ -17,7 +17,10 @@ class Interface
     @remotes[ipinfo]
   end
 
-  
+  def receive(package)
+    @device.receive(package)
+  end
+
   private
   def stripinfo(ip)
       #TODO: implementar
