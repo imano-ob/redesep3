@@ -9,7 +9,7 @@ class Interface
     #TODO: limite de banda
     dest = self.getDest(ip)
     event = Event.new(timeManager.getTime(), package, dest)
-    eventQueue.addEvent()
+    eventManager.addEvent()
   end
 
   def getDest(ip)
