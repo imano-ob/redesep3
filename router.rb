@@ -34,8 +34,19 @@ class Router
   end
 
   def continue()
-    package = self.queueTake
+
+    # Isso é chamado quando passa o tempo de processamento do pacote
+    # Ou deveria, se tudo estivesse funcionando
     #TODO: aprender corrotinas
+    # ou continuações
+    # ou seja la o que for que eu deva colocar aqui
+    # acho que eu devia ter prestado mais atenção em conceitos
+    # eu não queria ter que lidar com threads, mas talvez aqui fizesse sentido
+    # ou não, EP2 traumas feelings
+    # #ramblings
+
+    package = self.queueTake
+
     self.sendToIp(package, package.getDest)
     if not self.queueEmpty
       self.handlenextpackage
@@ -43,5 +54,7 @@ class Router
       @busy = false
     end
   end
+
+  #TODO: gerenciar fila
 
 end

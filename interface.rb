@@ -21,6 +21,13 @@ class Interface
     @device.receive(package)
   end
 
+  def receives(ip)
+    if not self.getDest (ip) == nil
+      true
+    end
+    false
+  end
+
   private
   def stripinfo(ip)
       #TODO: implementar
