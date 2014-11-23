@@ -1,0 +1,41 @@
+MAC 0448 - Programação para Redes de Computadores
+EP 4 - Simulador de redes
+
+Este EP não está nem perto de estar pronto. Ou funcional. Eu ia fazer em dupla,
+mas a gente praticamente não se falou e eu demorei demais para decidir fazer
+sozinho. Anywho, falemos sobre o que tem feito ou quase feito.
+
+O simulador rodaria em cima de eventos ordenados pelo tempo. Eventos seriam os
+envios de pacotes, términos de processamento de pacotes, timeouts, etc. Apenas
+eventos de pacotes e de espera de processamento foram implementados. Os eventos
+seriam gerenciados pelo Event Manager, e cada evento seria responsável por 
+chamar as coisas certas.
+
+Os hosts seriam objetos que tem aplicações e interfaces que apontam para
+roteadores, e passariam pacotes para as aplicações adequadas. Haveria um
+mapeamento de portas -> aplicação.
+
+Os roteadores teriam uma lista de interfaces, assim como uma lista de para qual
+endereço IP qual interface é responsável. Ao receber um pacote, ele o coloca numa
+fila de pacotes, e, se não estiver processando pacotes, começa a processar a fila.
+Se a fila estiver cheia, ele ignora o pacote recebido. Se o roteador recebe um 
+pacote enquanto está processando outro, ele será colocado no fim da fila.
+
+A interface receberia e enviaria pacotes. Limites de banda não foram
+implementados, mas a interface seria responsável por isso também.
+
+Pacotes poderiam ser TCP ou UDP, e ambos teriam em comum o header do IPv4. Nada
+disso foi implementado além de uma quantidade insuficiente de stubs, porém. Eles
+poderiam ser sniffados, mas não temos sniffers. Nem o que sniffar.
+
+Aliás, não temos sniffers nem aplicações. E nem um leitor de configurações. As
+implementações estão em geral imcompletas, impossibilitando testes. Talvez seja
+possível criar máquinas e enviar pacotes vazios de um lado para outro, mas eu não
+tentei. E honestamente, eu não confio que esse código no estado atual rode sem
+uma quantidade bem razoável de debug, dado que, exceto por um trecho pequeno do
+gerenciador de eventos, nunca foi rodado. Tenho medo de imaginar o número de
+typos e requires faltando.
+
+Eu considerei colocar uma carinha triste de slide. Talvez eu faça isso. Não vejo
+muito sentido fazer os slides dado o estado desse EP, mas who knows.
+
