@@ -3,7 +3,9 @@ require "./packageevent"
 
 class Interface
   
-  def intialize
+  def intialize (device, bandwidth)
+    @device = device
+    @bandwidth = bandwidth
     #TODO: stuff
   end
   
@@ -13,24 +15,8 @@ class Interface
     eventManager.addEvent()
   end
 
-  def getDest(ip)
-    ipinfo = self.stripinfo(ip)
-    @remotes[ipinfo]
-  end
-
   def receive(package)
     @device.receive(package)
   end
 
-  def receives(ip)
-    if not self.getDest (ip) == nil
-      true
-    end
-    false
-  end
-
-  private
-  def stripinfo(ip)
-      #TODO: implementar
-  end
 end
