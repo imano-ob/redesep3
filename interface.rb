@@ -8,7 +8,7 @@ class Interface
   def sendPackage(package, ip)
     #TODO: limite de banda
     dest = self.getDest(ip)
-    event = Event.new(eventManager.getTime() + delay, package, dest)
+    event = PackageEvent.new(eventManager.getTime() + delay, package, dest)
     eventManager.addEvent()
   end
 
