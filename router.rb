@@ -1,9 +1,10 @@
 # -*- coding: utf-8 -*-
 class Router
   
-  def initialize (interfaces)
+  def initialize (interfaces, perf)
     #reminder to self: isso é um array
     @interfaces = interfaces
+    @perf = perf
   end
 
   def sendToIp (package, ip)
@@ -21,7 +22,26 @@ class Router
   end
   
   def receive(package)
+    self.queueAdd(package)
+    if not @busy
+      self.handlenextpackage
+    end
+  end
+
+  def handlenextpackage()
+    @busy = true
+    eventmanager.wait(self, perf)
+  end
+
+  def continue()
+    package = self.queueTake
+    #TODO: aprender corrotinas
     self.sendToIp(package, package.getDest)
+    if not self.queueEmpty
+      self.handlenextpackage
+    else
+      @busy = false
+    end
   end
 
 end

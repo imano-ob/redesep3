@@ -1,3 +1,4 @@
+require "./event"
 
 class EventManager
 
@@ -16,8 +17,13 @@ class EventManager
 
   def handleNextEvent()
     event = @eventqueue.takeEvent()
-    receiver = event.getReceiver
-    receiver.receive(event.getPacket())
+    @time = event.getTime()
+    event.handle
+  end
+
+  def wait(obj, time)
+    event = WaitEvent.new(obj, @time + time)
+    self.addEvent(event)
   end
 
 end
