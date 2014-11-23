@@ -20,8 +20,7 @@ class Host
     if @applications[port] == nil
       @applications[port] = application
     else
-      print("derp\n")
-      #TODO: ver exceções
+      #TODO: erro
     end
   end
 

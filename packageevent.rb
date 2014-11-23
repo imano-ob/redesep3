@@ -1,3 +1,5 @@
+require "./event"
+
 class PackageEvent < Event
 
   def initialize(time, packet, receiver)

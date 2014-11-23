@@ -9,11 +9,14 @@ class EventQueue
   def addEvent (event)
     @queue.push(event)
     @queue.sort!
-    @queue.reverse!
   end
 
   def takeEvent()
-    @queue.pop()
+    @queue.shift()
+  end
+
+  def isEmpty()
+    @queue.empty?
   end
 
 end

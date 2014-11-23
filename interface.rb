@@ -1,3 +1,5 @@
+require "./eventmanager"
+require "./packageevent"
 
 class Interface
   
@@ -5,9 +7,8 @@ class Interface
     #TODO: stuff
   end
   
-  def sendPackage(package, ip)
+  def sendPackage(package, dest)
     #TODO: limite de banda
-    dest = self.getDest(ip)
     event = PackageEvent.new(eventManager.getTime() + delay, package, dest)
     eventManager.addEvent()
   end

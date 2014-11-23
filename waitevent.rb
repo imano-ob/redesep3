@@ -1,3 +1,5 @@
+require "./event"
+
 class WaitEvent < Event
   
   def initialize(obj, time)

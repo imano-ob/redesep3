@@ -26,4 +26,8 @@ class EventManager
     self.addEvent(event)
   end
 
+  def isEmpty()
+    return @eventqueue.isEmpty
+  end
+
 end

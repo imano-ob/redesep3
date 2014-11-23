@@ -1,10 +1,14 @@
 # -*- coding: utf-8 -*-
 class Router
   
-  def initialize (interfaces, perf)
+  def initialize (interfaces, dests, perf, queuesize)
     #reminder to self: isso é um array
     @interfaces = interfaces
+    #hash ip->interface
+    @dests = dests
     @perf = perf
+    @queue = Array.new
+    @queuesize = queuesize
   end
 
   def sendToIp (package, ip)
@@ -13,18 +17,25 @@ class Router
   end
 
   def getInterface (ip)
-    @interfaces.each do |interface|
-      if interface.receives(ip)
-        return interface
+    if @dests[ip] != nil 
+      interface = @dests[ip]
+    else 
+      outbound = self.outbound(ip)
+      if @dests[outbound]
+        interface = @dests[outbound]
+      else
+        #erro
       end
-      #TODO: erro
     end
+    interface
   end
   
   def receive(package)
-    self.queueAdd(package)
-    if not @busy
-      self.handlenextpackage
+    if not self.queueFull
+      self.queueAdd(package)
+      if not @busy
+        self.handlenextpackage
+      end
     end
   end
 
@@ -55,6 +66,22 @@ class Router
     end
   end
 
-  #TODO: gerenciar fila
+  def queueEmpty
+    @queue.empty?
+  end
+
+  def queueTake
+    @queue.shift
+  end
+
+  def queueAdd (package)
+    @queue.push(package)
+  end
+
+  def queueFull()
+    #deliberadamente off by one porque o pacote sendo processado ainda não foi
+    #removido da fila
+    @queue.size > @queuesize
+  end
 
 end
